@@ -12,4 +12,4 @@ services:
       - key: REDDIT_CLIENT_SECRET
         sync: false
       - key: REDDIT_USER_AGENT
-        value: ProductInventor/1.0
+        value: Invently/1.0
