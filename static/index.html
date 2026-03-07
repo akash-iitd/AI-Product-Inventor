@@ -1,175 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Product Inventor — Find Real Unmet Consumer Needs</title>
-    <meta name="description" content="AI-powered product innovation engine that scans real consumer data to find genuine unmet needs and generate data-backed product concepts for D2C brands.">
+    <title>Invently — Find Real Unmet Consumer Needs</title>
+    <meta name="description"
+        content="AI-powered product innovation engine that scans real consumer data to find genuine unmet needs and generate data-backed product concepts for D2C brands.">
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
+
 <body>
 
-<!-- Animated Background -->
-<div class="bg-animation">
-    <div class="bg-orb"></div>
-    <div class="bg-orb"></div>
-    <div class="bg-orb"></div>
-</div>
-
-<!-- Navbar -->
-<nav class="navbar">
-    <div class="container">
-        <a href="/" class="logo">
-            <div class="logo-icon">🔬</div>
-            Invently
-        </a>
-        <span class="nav-badge">Powered by Gemini AI</span>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
+        <div class="bg-orb"></div>
     </div>
-</nav>
 
-<!-- Hero Section -->
-<section id="hero" class="hero">
-    <div class="container">
-        <div class="hero-badge">
-            <span class="pulse"></span>
-            Live Consumer Intelligence
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <div class="logo-icon">🔬</div>
+                Invently
+            </a>
+            <span class="nav-badge">Powered by Gemini AI</span>
         </div>
-        <h1>
-            Find the Unmet Needs<br>
-            <span class="gradient-text">No One Is Serving</span>
-        </h1>
-        <p class="hero-subtitle">
-            Scan real product reviews, Reddit discussions, and search trends to discover genuine market gaps — backed by hard evidence, not guesswork.
-        </p>
+    </nav>
 
-        <div class="search-container">
-            <div class="search-box">
-                <input
-                    type="text"
-                    id="categoryInput"
-                    placeholder="Enter a product category (e.g., protein bars, vitamin C serum)"
-                    autocomplete="off"
-                >
-                <button class="search-btn" id="analyzeBtn" onclick="startAnalysis()">
-                    🔍 Analyze
-                </button>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span class="pulse"></span>
+                Live Consumer Intelligence
+            </div>
+            <h1>
+                Find the Unmet Needs<br>
+                <span class="gradient-text">No One Is Serving</span>
+            </h1>
+            <p class="hero-subtitle">
+                Scan real product reviews, Reddit discussions, and search trends to discover genuine market gaps —
+                backed by hard evidence, not guesswork.
+            </p>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="categoryInput"
+                        placeholder="Enter a product category (e.g., protein bars, vitamin C serum)" autocomplete="off">
+                    <button class="search-btn" id="analyzeBtn" onclick="startAnalysis()">
+                        🔍 Analyze
+                    </button>
+                </div>
+
+                <div class="search-suggestions">
+                    <span class="suggestion-chip" onclick="fillCategory('vitamin C serum')">vitamin C serum</span>
+                    <span class="suggestion-chip" onclick="fillCategory('protein bars India')">protein bars India</span>
+                    <span class="suggestion-chip" onclick="fillCategory('baby skincare')">baby skincare</span>
+                    <span class="suggestion-chip" onclick="fillCategory('hair growth oil')">hair growth oil</span>
+                    <span class="suggestion-chip" onclick="fillCategory('plant protein powder')">plant protein
+                        powder</span>
+                    <span class="suggestion-chip" onclick="fillCategory('organic green tea')">organic green tea</span>
+                </div>
             </div>
 
-            <div class="search-suggestions">
-                <span class="suggestion-chip" onclick="fillCategory('vitamin C serum')">vitamin C serum</span>
-                <span class="suggestion-chip" onclick="fillCategory('protein bars India')">protein bars India</span>
-                <span class="suggestion-chip" onclick="fillCategory('baby skincare')">baby skincare</span>
-                <span class="suggestion-chip" onclick="fillCategory('hair growth oil')">hair growth oil</span>
-                <span class="suggestion-chip" onclick="fillCategory('plant protein powder')">plant protein powder</span>
-                <span class="suggestion-chip" onclick="fillCategory('organic green tea')">organic green tea</span>
+            <div class="source-badges">
+                <span class="source-badge"><span class="dot" style="background: #ff9900"></span>Amazon India</span>
+                <span class="source-badge"><span class="dot" style="background: #2874f0"></span>Flipkart</span>
+                <span class="source-badge"><span class="dot" style="background: #fc2779"></span>Nykaa</span>
+                <span class="source-badge"><span class="dot" style="background: #ff4500"></span>Reddit</span>
+                <span class="source-badge"><span class="dot" style="background: #4285f4"></span>Google Trends</span>
             </div>
         </div>
+    </section>
 
-        <div class="source-badges">
-            <span class="source-badge"><span class="dot" style="background: #ff9900"></span>Amazon India</span>
-            <span class="source-badge"><span class="dot" style="background: #2874f0"></span>Flipkart</span>
-            <span class="source-badge"><span class="dot" style="background: #fc2779"></span>Nykaa</span>
-            <span class="source-badge"><span class="dot" style="background: #ff4500"></span>Reddit</span>
-            <span class="source-badge"><span class="dot" style="background: #4285f4"></span>Google Trends</span>
-        </div>
-    </div>
-</section>
+    <!-- Loading Section -->
+    <section id="loading" class="loading-section">
+        <div class="container">
+            <div class="loading-card">
+                <div class="loading-icon">🧠</div>
+                <h3 class="loading-title">Analyzing Consumer Data</h3>
+                <p class="loading-status" id="loadingStatus">Starting analysis pipeline...</p>
 
-<!-- Loading Section -->
-<section id="loading" class="loading-section">
-    <div class="container">
-        <div class="loading-card">
-            <div class="loading-icon">🧠</div>
-            <h3 class="loading-title">Analyzing Consumer Data</h3>
-            <p class="loading-status" id="loadingStatus">Starting analysis pipeline...</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
 
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-
-            <div class="progress-steps">
-                <div class="progress-step" id="step-scraping">
-                    <span class="step-icon">1</span>
-                    <span>Scraping reviews from Amazon, Flipkart, Nykaa</span>
-                </div>
-                <div class="progress-step" id="step-reddit">
-                    <span class="step-icon">2</span>
-                    <span>Scanning Reddit communities & forums</span>
-                </div>
-                <div class="progress-step" id="step-trends">
-                    <span class="step-icon">3</span>
-                    <span>Fetching Google Trends data</span>
-                </div>
-                <div class="progress-step" id="step-analyzing">
-                    <span class="step-icon">4</span>
-                    <span>Extracting pain points with Gemini AI</span>
-                </div>
-                <div class="progress-step" id="step-gaps">
-                    <span class="step-icon">5</span>
-                    <span>Identifying market gaps</span>
-                </div>
-                <div class="progress-step" id="step-generating">
-                    <span class="step-icon">6</span>
-                    <span>Generating product concepts</span>
-                </div>
-                <div class="progress-step" id="step-scoring">
-                    <span class="step-icon">7</span>
-                    <span>Scoring concepts by market potential</span>
+                <div class="progress-steps">
+                    <div class="progress-step" id="step-scraping">
+                        <span class="step-icon">1</span>
+                        <span>Scraping reviews from Amazon, Flipkart, Nykaa</span>
+                    </div>
+                    <div class="progress-step" id="step-reddit">
+                        <span class="step-icon">2</span>
+                        <span>Scanning Reddit communities & forums</span>
+                    </div>
+                    <div class="progress-step" id="step-trends">
+                        <span class="step-icon">3</span>
+                        <span>Fetching Google Trends data</span>
+                    </div>
+                    <div class="progress-step" id="step-analyzing">
+                        <span class="step-icon">4</span>
+                        <span>Extracting pain points with Gemini AI</span>
+                    </div>
+                    <div class="progress-step" id="step-gaps">
+                        <span class="step-icon">5</span>
+                        <span>Identifying market gaps</span>
+                    </div>
+                    <div class="progress-step" id="step-generating">
+                        <span class="step-icon">6</span>
+                        <span>Generating product concepts</span>
+                    </div>
+                    <div class="progress-step" id="step-scoring">
+                        <span class="step-icon">7</span>
+                        <span>Scoring concepts by market potential</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Results Section -->
-<section id="results" class="results-section">
-    <div class="container">
-        <div class="results-header">
-            <h2>Product Concepts for <span class="gradient-text" id="resultCategory"></span></h2>
-            <p class="subtitle" id="resultSubtitle"></p>
+    <!-- Results Section -->
+    <section id="results" class="results-section">
+        <div class="container">
+            <div class="results-header">
+                <h2>Product Concepts for <span class="gradient-text" id="resultCategory"></span></h2>
+                <p class="subtitle" id="resultSubtitle"></p>
+            </div>
+
+            <!-- Stats Strip -->
+            <div class="stats-strip" id="statsStrip"></div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('concepts')">🎯 Product Concepts</button>
+                <button class="tab-btn" onclick="switchTab('painpoints')">🔴 Pain Points</button>
+                <button class="tab-btn" onclick="switchTab('gaps')">📊 Market Gaps</button>
+                <button class="tab-btn" onclick="switchTab('trends')">📈 Trends</button>
+            </div>
+
+            <!-- Concepts Tab -->
+            <div class="tab-panel active" id="panel-concepts">
+                <div class="concepts-grid" id="conceptsGrid"></div>
+            </div>
+
+            <!-- Pain Points Tab -->
+            <div class="tab-panel" id="panel-painpoints">
+                <div class="pain-points-grid" id="painPointsGrid"></div>
+            </div>
+
+            <!-- Gaps Tab -->
+            <div class="tab-panel" id="panel-gaps">
+                <div class="gaps-grid" id="gapsGrid"></div>
+            </div>
+
+            <!-- Trends Tab -->
+            <div class="tab-panel" id="panel-trends">
+                <div class="trends-grid" id="trendsGrid"></div>
+            </div>
         </div>
+    </section>
 
-        <!-- Stats Strip -->
-        <div class="stats-strip" id="statsStrip"></div>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('concepts')">🎯 Product Concepts</button>
-            <button class="tab-btn" onclick="switchTab('painpoints')">🔴 Pain Points</button>
-            <button class="tab-btn" onclick="switchTab('gaps')">📊 Market Gaps</button>
-            <button class="tab-btn" onclick="switchTab('trends')">📈 Trends</button>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Invently — Built with Gemini AI · Data from Amazon, Flipkart, Nykaa, Reddit, Google Trends</p>
         </div>
+    </footer>
 
-        <!-- Concepts Tab -->
-        <div class="tab-panel active" id="panel-concepts">
-            <div class="concepts-grid" id="conceptsGrid"></div>
-        </div>
-
-        <!-- Pain Points Tab -->
-        <div class="tab-panel" id="panel-painpoints">
-            <div class="pain-points-grid" id="painPointsGrid"></div>
-        </div>
-
-        <!-- Gaps Tab -->
-        <div class="tab-panel" id="panel-gaps">
-            <div class="gaps-grid" id="gapsGrid"></div>
-        </div>
-
-        <!-- Trends Tab -->
-        <div class="tab-panel" id="panel-trends">
-            <div class="trends-grid" id="trendsGrid"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <p>Invently — Built with Gemini AI · Data from Amazon, Flipkart, Nykaa, Reddit, Google Trends</p>
-    </div>
-</footer>
-
-<script src="/static/app.js"></script>
+    <script src="/static/app.js"></script>
 </body>
+
 </html>
