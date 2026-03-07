@@ -1,5 +1,5 @@
 /**
- * AI Product Inventor — Frontend Application
+ * Invently — Frontend Application
  * Handles API calls, dynamic rendering, Chart.js radar charts,
  * and animated UI state transitions.
  */
