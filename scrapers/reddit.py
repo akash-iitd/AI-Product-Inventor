@@ -116,7 +116,7 @@ async def _scrape_reddit_web(category: str, subreddits: List[str], max_posts: in
                     
                     await asyncio.sleep(random.uniform(1.5, 3.0))
                     resp = await client.get(search_url, params=params, headers={
-                        "User-Agent": "ProductInventor/1.0 (research bot)",
+                        "User-Agent": "Invently/1.0 (research bot)",
                     }, timeout=15)
                     
                     if resp.status_code == 200:
@@ -160,7 +160,7 @@ async def _get_post_comments(client: httpx.AsyncClient, permalink: str, max_comm
     try:
         url = f"https://old.reddit.com{permalink}.json"
         resp = await client.get(url, headers={
-            "User-Agent": "ProductInventor/1.0 (research bot)",
+            "User-Agent": "Invently/1.0 (research bot)",
         }, timeout=10)
         
         if resp.status_code == 200:
