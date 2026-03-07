@@ -1,10 +1,10 @@
 """
-AI Product Inventor — FastAPI Backend
+Invently — FastAPI Backend
 Scans product reviews, forums, and trends to identify genuine unmet consumer needs
 and generates data-backed product concepts.
 
 Pipeline: 2 Gemini API calls total (optimized for free tier).
-Call 1: Analyze data -> pain points + market gaps
+Call 1: Analyze data → pain points + market gaps
 Call 2: Generate + score product concepts
 """
 
@@ -31,7 +31,7 @@ from scrapers.trends import get_google_trends
 from engine.analyzer import analyze_and_find_gaps
 from engine.concept_generator import generate_and_score_concepts
 
-app = FastAPI(title="AI Product Inventor", version="1.0.0")
+app = FastAPI(title="Invently", version="1.0.0")
 
 # Serve static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -112,7 +112,7 @@ async def run_pipeline(job_id: str, category: str, region: str):
     Total Gemini calls: exactly 2 (optimized for free tier).
     """
     try:
-        # Step 1: Scrape data from all sources
+        # ── Step 1: Scrape data from all sources ──
         jobs[job_id].update({"status": "scraping", "progress": 5, "message": "Scraping product reviews from Amazon..."})
         
         # Run scrapers with error tolerance
@@ -162,7 +162,7 @@ async def run_pipeline(job_id: str, category: str, region: str):
             })
             return
 
-        # Step 2: GEMINI CALL 1 — Analyze data -> pain points + gaps
+        # ── Step 2: GEMINI CALL 1 — Analyze data → pain points + gaps ──
         jobs[job_id].update({
             "status": "analyzing",
             "progress": 52,
@@ -176,7 +176,7 @@ async def run_pipeline(job_id: str, category: str, region: str):
             "message": f"Found {len(pain_points)} pain points, {len(gaps)} market gaps. Generating product concepts..."
         })
         
-        # Step 3: GEMINI CALL 2 — Generate + score concepts
+        # ── Step 3: GEMINI CALL 2 — Generate + score concepts ──
         jobs[job_id].update({
             "status": "generating",
             "progress": 75,
@@ -185,7 +185,7 @@ async def run_pipeline(job_id: str, category: str, region: str):
         
         scored_concepts = await generate_and_score_concepts(gaps, pain_points, trends_data, category)
         
-        # Done
+        # ── Done ──
         result = {
             "category": category,
             "region": region,
